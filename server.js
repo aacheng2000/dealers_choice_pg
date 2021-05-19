@@ -12,25 +12,36 @@ app.get('/', async(req, res, next)=> {
 		      res.send(`
           <html>
         <head>
-	<link rel='stylesheet' href='/assets/styles.css'/>
+	<link rel='stylesheet' href='/styles.css'/>
+       <style>
+         th {
+	  border: 1px solid black;
+	padding: 1rem
+	}
+       </style>
       </head>
            <body>
-          <h1>Sneaker World</h1>
-    	<h2>Brands</h2>
-        <ul>
-          ${
+          <h1>Job World</h1>
+    	<h2>Postings</h2>
+        <table style="font-family: verdana; border:1px solid black">
+        <tr style="background-color:grey">
+	<th>ID</th>
+	<th>Date Posted</th>
+	<th>Job Title</th>
+	<th>Company</th>
+	<th>Salary</th>
+	</tr>		      ${
            postings.map( posting => `
-                 <li>
-         <a href ='/postings/${posting.id}'>
-               -  ${posting.title} 
-        	-  ${ posting.company }
-               -  ${posting.dateposted}
-	       -  ${posting.salary}
-	       </a>:
-               </li>
+                 <tr>
+         <th><a href ='/postings/${posting.id}'>${posting.id}</a></th>
+               <th style="width:150px">${     posting.datepost}</th>
+	       <th> ${posting.title} </th>
+               <th>  ${ posting.company }</th>
+	       <th style="width:400"> ${posting.salary}</th>
+               </tr>
             `).join('')
             }
-            </ul>
+            </table>
           </body>
       </html>
           `);
